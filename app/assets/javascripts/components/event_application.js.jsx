@@ -21,6 +21,11 @@ var EventApplication = React.createClass({
   handleSearch: function(events) {
     this.setState({ events: events });
   },
+  handleAdd: function(event) {
+    var events = this.state.events;
+    events.push(event);
+    this.setState({events: events});
+  },
   render: function() {
     return(
       <div className="container">
@@ -29,8 +34,11 @@ var EventApplication = React.createClass({
           <p>by Piotr Jaworski</p>
         </div>
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <SearchForm handleSearch={this.handleSearch} />
+          </div>
+          <div className="col-md-9">
+            <NewForm handleAdd={this.handleAdd} />
           </div>
         </div>
         <div className="row">
