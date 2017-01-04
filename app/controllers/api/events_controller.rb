@@ -1,4 +1,6 @@
 class Api::EventsController < ApplicationController
+  before_filter :set_event, only: :destroy
+
 	def index
 		render json: Event.all
 	end
@@ -21,7 +23,16 @@ class Api::EventsController < ApplicationController
   	end
   end
 
+  def destroy
+    @event.destroy
+    head :no_content
+  end
+
   private
+  def set_event
+    @event = Event.find params[:id]
+  end
+
   def event_params
   	params.require(:event).permit(:name, :description, :event_date, :place)
   end
